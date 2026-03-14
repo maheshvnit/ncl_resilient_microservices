@@ -176,25 +176,27 @@ The goal was to check that each app correctly implements retry, timeout, circuit
 ---
 
 ## 🧠 What is Actually Implemented (All APIs+Services)
-- Core resilience implementation patterns:
-- Redis retry: ioredis retry strategy exponential backoff and reconnectOnError in each Redis utility.
-- Timeout: email/Redis operations use default timeouts; handlers avoid crashing by catching errors.
-- Circuit breaker:
-  - Redis counter + TTL check for shared distributed limiting
-  - Local memory map fallback
-  - ERROR_EMAIL_MAX and ERROR_EMAIL_WINDOW_MS config controls threshold
-- Fallback:
-  - When Redis is unavailable, local in-memory limiter and allow-on-redis-failure behavior.
-  - Error emails are fire-and-forget; request response still returns standard HTTP error.
-- Graceful failure:
-  - All apps catch email send failures and do not block request flow.
-  - They log and continue.
+
+Core resilience implementation patterns:
+  - Redis retry: ioredis retry strategy exponential backoff and reconnectOnError in each Redis utility.
+  - Timeout: email/Redis operations use default timeouts; handlers avoid crashing by catching errors.
+  - Circuit breaker:
+    - Redis counter + TTL check for shared distributed limiting
+    - Local memory map fallback
+    - ERROR_EMAIL_MAX and ERROR_EMAIL_WINDOW_MS config controls threshold
+  - Fallback:
+    - When Redis is unavailable, local in-memory limiter and allow-on-redis-failure behavior.
+    - Error emails are fire-and-forget; request response still returns standard HTTP error.
+  - Graceful failure:
+    - All apps catch email send failures and do not block request flow.
+    - They log and continue.
 
 App behavior summary (as README table):
-- express-app: Redis yes, retry yes, circuit Redis+memory yes, fallback yes
-- nest-api: same as express
-- nest-app: same as express
-- fastify-app: no Redis required, no retry fallback needed, memory circuit only
+
+  - express-app: Redis yes, retry yes, circuit Redis+memory yes, fallback yes
+  - nest-api: same as express
+  - nest-app: same as express
+  - fastify-app: no Redis required, no retry fallback needed, memory circuit only
 
 ---
 
