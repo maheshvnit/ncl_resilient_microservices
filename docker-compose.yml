@@ -1,0 +1,163 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - '63791:6379'
+    volumes:
+      - redis-data:/data      
+
+  express-app:
+    build:
+      context: ./express-app
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+      - ERROR_EMAIL_WINDOW_MS=600000
+      - ERROR_EMAIL_MAX=3
+      # SMTP config (Mailpit service)
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USER=
+      - SMTP_PASS=
+      - ERROR_TO=${ERROR_TO}
+      - ERROR_FROM=${ERROR_FROM}
+      - SERVICE_NAME=express-app
+    ports:
+      - '3030:3000'
+    depends_on:
+      - redis
+      - mailpit
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nest-app:
+    build:
+      context: ./nest-app
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - REDIS_URL=redis://redis:6379
+      - ERROR_EMAIL_WINDOW_MS=600000
+      - ERROR_EMAIL_MAX=3
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USER=
+      - SMTP_PASS=
+      - ERROR_TO=${ERROR_TO}
+      - ERROR_FROM=${ERROR_FROM}
+      - SERVICE_NAME=nest-app
+    ports:
+      - '3031:3001'
+    depends_on:
+      - redis
+      - mailpit
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nest-api:
+    build:
+      context: ./nest-api
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+      - REDIS_URL=redis://redis:6379
+      - ERROR_EMAIL_WINDOW_MS=600000
+      - ERROR_EMAIL_MAX=3
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USER=
+      - SMTP_PASS=
+      - ERROR_TO=${ERROR_TO}
+      - ERROR_FROM=${ERROR_FROM}
+      - SERVICE_NAME=nest-api
+    ports:
+      - '3032:3002'
+    depends_on:
+      - redis
+      - mailpit
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3002/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  fastify-app:
+    build:
+      context: ./fastify-app
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - REDIS_URL=redis://redis:6379
+      - ERROR_EMAIL_WINDOW_MS=600000
+      - ERROR_EMAIL_MAX=3
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USER=
+      - SMTP_PASS=
+      - ERROR_TO=${ERROR_TO}
+      - ERROR_FROM=${ERROR_FROM}
+      - SERVICE_NAME=fastify-app
+    ports:
+      - '3033:3003'
+    depends_on:
+      - redis
+      - mailpit
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3003/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    restart: unless-stopped
+    volumes:
+      - mailpit-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8025/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    container_name: redis-commander
+    hostname: redis-commander
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      # Optional: Add HTTP basic auth
+      # - HTTP_USER=youruser
+      # - HTTP_PASSWORD=yourpassword
+    ports:
+      - "8041:8081"
+    depends_on:
+      - redis
+    user: redis 
+
+
+networks:
+  default:
+    name: tst_apps_net
+
+volumes:
+  mailpit-data:
+    name: tst_mailpit_data
+  redis-data:
+    driver: local    

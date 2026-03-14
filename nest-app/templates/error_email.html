@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<body style="font-family:Arial,Helvetica,sans-serif;">
+  <h2 style="color:#c00">Application Error</h2>
+  <p><strong>Time:</strong> {{TIME}}</p>
+  <p><strong>Service:</strong> {{SERVICE}}</p>
+  <p><strong>Route:</strong> {{ROUTE}}</p>
+  <p><strong>Message:</strong> {{MESSAGE}}</p>
+  <h3>Stack</h3>
+  <pre style="background:#f4f4f4;padding:10px;border-radius:4px;">{{STACK}}</pre>
+  <h3>Request</h3>
+  <p><strong>Method:</strong> {{REQ_METHOD}}</p>
+  <p><strong>Query:</strong> {{REQ_QUERY}}</p>
+  <p><strong>Body:</strong></p>
+  <pre style="background:#f9f9f9;padding:8px;border-radius:4px;">{{REQ_BODY}}</pre>
+  <h3>Headers</h3>
+  <pre style="background:#f9f9f9;padding:8px;border-radius:4px;">{{REQ_HEADERS}}</pre>
+  <h3>Env</h3>
+  <pre style="background:#f9f9f9;padding:8px;border-radius:4px;">{{ENV}}</pre>
+</body>
+</html>
