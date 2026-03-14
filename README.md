@@ -4,7 +4,7 @@
 # Fault-Tolerance and Resiliency Mechanisms
 # Service Resilience and Fault-Tolerance Patterns
 
-![Service Resilience Architecture](docs/Service resilience flowchart overview.png)
+![Service Resilience Architecture](docs/Service-resilience-flowchart-overview.png)
 
 Service resilience is a core architectural capability in distributed systems and microservices. The goal is to **keep the system functional even when some components fail, slow down, or become temporarily unavailable**. In Node.js systems (Express, NestJS, Fastify), resilience is implemented through several **fault-tolerance patterns**.
 
@@ -71,7 +71,7 @@ These resilience patterns can be implemented in Node.js ecosystems such as Expre
 
 In distributed systems, resilience is not optional — it is part of the architecture.
 
-![Service resilience architecture](docs/Service resilience architecture.png)
+![Service resilience architecture](docs/Service-resilience-architecture.png)
 
 ## Behavior of Each App
 
@@ -116,4 +116,4 @@ No code crashes the process; failures are logged and the HTTP handlers always re
 The goal was to check that each app correctly implements retry, timeout, circuit breaker and fallback, then yes – they are implemented consistently across the board.
 
 
-![Fault tolerance in microservice architecture](docs/Fault tolerance in microservice architecture.png)
+![Fault tolerance in microservice architecture](docs/Fault-tolerance-in-microservice-architecture.png)
