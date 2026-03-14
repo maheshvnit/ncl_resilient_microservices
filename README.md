@@ -117,3 +117,32 @@ The goal was to check that each app correctly implements retry, timeout, circuit
 
 
 ![Fault tolerance in microservice architecture](docs/Fault-tolerance-in-microservice-architecture.png)
+
+---
+
+## 📌 Use Cases
+
+- Microservices Resilience Architecture
+- Debugging production incidents
+- Performance tuning
+- SRE / Platform engineering setups
+- Learning LGTM stack
+
+---
+
+## 🤝 Contributing
+
+PRs and improvements are welcome!
+Feel free to open issues or suggest enhancements.
+
+---
+
+## ⭐ If this helped you
+
+Give the repo a ⭐ and share it with your team!
+
+---
+
+## 📜 License
+
+MIT License
