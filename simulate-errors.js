@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 // Simulate multiple error requests to both services to demonstrate cross-instance rate-limiting
+// how to run:
+// $ node ncl_resilient_microservices/simulate-errors.js 12 4
+// $ node ncl_resilient_microservices/simulate-errors.js 36 9
+// $ node simulate-errors.js 12 4
+// $ node simulate-errors.js 36 9
+
 const count = Number(process.argv[2] || 20);
 const concurrency = Number(process.argv[3] || 5);
 const expressUrl = process.env.EXPRESS_URL || 'http://localhost:3030/api/error';
