@@ -1,8 +1,11 @@
-# compiled output
-/dist
-/node_modules
-/build
+# ===============================
+# Node Modules
+# ===============================
+node_modules/
 
+# ===============================
+# Logs
+# ===============================
 # Logs
 logs
 *.log
@@ -12,10 +15,28 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
-.DS_Store
+# ===============================
+# Build Output
+# ===============================
+# compiled output
+dist/
+build/
+coverage/
+.tmp/
+.cache/
 
+# ===============================
+# OS Files
+# ===============================
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Testing
+# ===============================
 # Tests
+/jest-cache
 /coverage
 /.nyc_output
 
@@ -28,24 +49,42 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# ===============================
+# IDE / Editor
+# ===============================
 # IDE - VSCode
+.vscode/
+*.swp
+*.swo
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# ===============================
+# Environment Files
+# ===============================
 # dotenv environment variable files
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env.*
+!.env.example
+!.env.example1
+!.env.example2
 
+# ===============================
+# Temporary Files
+# ===============================
 # temp directory
+tmp/
+temp/
 .temp
 .tmp
 
+# ===============================
+# Docker
+# ===============================
+docker-data/
 # Runtime data
 pids
 *.pid
@@ -54,3 +93,16 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ===============================
+# Prisma
+# ===============================
+prisma/migrations/*.db
+
+# ===============================
+# Misc
+# ===============================
+*.tgz
+*.zip
+*.tar
+*.gz

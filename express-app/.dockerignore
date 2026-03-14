@@ -1,5 +1,50 @@
+*.tgz
+.dockerignore
+Dockerfile
+# Git
+.git
+.gitignore
+
+# Node modules
 node_modules
-.env
 npm-debug.log
+
+# Logs
+*.log
+logs
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.example1
+!.env.example2
+
+# Build output
 dist
-/*.tgz
+build
+coverage
+
+# Tests
+test
+tests
+__tests__
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+
+# Docker files (optional depending on build)
+docker-compose.yml
+
+# Temporary
+tmp
+temp
+.cache
